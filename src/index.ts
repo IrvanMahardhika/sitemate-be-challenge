@@ -8,6 +8,8 @@ import http from 'http';
 import { config } from 'dotenv';
 config();
 
+import router from './router';
+
 const app = express();
 
 app.use(cookieParser());
@@ -24,6 +26,8 @@ const mongodbUrl =
 mongoose.Promise = Promise;
 mongoose.connect(mongodbUrl);
 mongoose.connection.on('error', (err) => console.log(err));
+
+app.use('/', router());
 
 const server = http.createServer(app);
 
